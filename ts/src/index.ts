@@ -22,12 +22,10 @@
 //     * É preciso ter uma listagem de funcionários, para isso utilize uma classe Funcionários 
 //         * A classe Funcionarios deve métodos para adicionar e remover um funcionário
 
-import promptSync from 'prompt-sync'
-
-const prompt = promptSync();
-
-
 abstract class Funcionarios {
+
+    private static listaDeFuncionarios: Funcionarios[] = [];
+
     private _nome: string;
     private _idade: number;
     private _cpf: string;
@@ -42,6 +40,21 @@ abstract class Funcionarios {
         this._formacao = _formacao;
         this._statusDaFormacao = "Concluído"
         this._cargaHoraria = _cargaHoraria;
+    }
+
+    static adicionarFuncionario(funcionario: Funcionarios) {
+        Funcionarios.listaDeFuncionarios.push(funcionario);
+    }
+
+    static removerFuncionario(funcionario: Funcionarios) {
+        const index = Funcionarios.listaDeFuncionarios.indexOf(funcionario);
+        if (index !== -1) {
+            Funcionarios.listaDeFuncionarios.splice(index, 1);
+        }
+    }
+
+    static listarFuncionarios(){
+        return Funcionarios.listaDeFuncionarios;
     }
 
     get nome(){
@@ -115,9 +128,13 @@ class Estagiario extends Funcionarios{
 const clt1 = new CLT ('Edson', 24, "149.824.057-78", "Ciência da Computação", 40, "Dev Back-End Junior", 3000)
 
 const estagiario1 = new Estagiario ('João', 22, "000.000.000-00", "Análise e Desenvolvimento de Sistemas", 20, "Back-End", 1200)
-console.log(clt1)
+
+Funcionarios.adicionarFuncionario(clt1)
+console.log(Funcionarios.listarFuncionarios())
 console.log(clt1.gerarRemuneracao())
 
-console.log(estagiario1)
-console.log(estagiario1.gerarRemuneracao())
+Funcionarios.adicionarFuncionario(estagiario1)
+console.log(Funcionarios.listarFuncionarios())
+Funcionarios.removerFuncionario(estagiario1)
 
+console.log(Funcionarios.listarFuncionarios())
