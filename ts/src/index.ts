@@ -22,6 +22,11 @@
 //     * É preciso ter uma listagem de funcionários, para isso utilize uma classe Funcionários 
 //         * A classe Funcionarios deve métodos para adicionar e remover um funcionário
 
+import promptSync from 'prompt-sync'
+
+const prompt = promptSync();
+
+
 abstract class Funcionarios {
     private _nome: string;
     private _idade: number;
