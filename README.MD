@@ -1,0 +1,1 @@
+## O projeto aborda um sistema que faz o controle de uma lista de funcionários, utilizando conceitos de Orientação a Objeto com TypeScript
