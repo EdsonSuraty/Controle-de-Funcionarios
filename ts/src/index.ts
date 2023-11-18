@@ -26,14 +26,16 @@ abstract class Funcionarios {
     private _nome: string;
     private _idade: number;
     private _cpf: string;
-    protected _formacao: string;
+    private _formacao: string;
+    protected _statusDaFormacao: string;
     private _cargaHoraria: number;
     
-    constructor(_nome:string,_idade:number, _cpf:string, _cargaHoraria: number){
+    constructor(_nome:string,_idade:number, _cpf:string, _formacao:string, _cargaHoraria: number){
         this._nome = _nome;
         this._idade = _idade;
         this._cpf = _cpf;
-        this._formacao = "concluído";
+        this._formacao = _formacao;
+        this._statusDaFormacao = "Concluído"
         this._cargaHoraria = _cargaHoraria;
     }
 
@@ -59,8 +61,8 @@ abstract class Funcionarios {
 class CLT extends Funcionarios{
     private _cargo: string
     private _salario: number
-    constructor(_nome:string,_idade:number, _cpf:string, _cargaHoraria: number,  _cargo:string, _salario:number){
-        super(_nome,_idade, _cpf, _cargaHoraria)
+    constructor(_nome:string,_idade:number, _cpf:string,_formacao: string, _cargaHoraria: number,  _cargo:string, _salario:number){
+        super(_nome,_idade, _cpf,_formacao, _cargaHoraria)
         this._cargo = _cargo;
         this._salario = _salario
     }
@@ -84,11 +86,11 @@ class Estagiario extends Funcionarios{
     private _bolsa: number;
     private _areaDeAtuacao: string;
 
-    constructor(_nome:string,_idade:number, _cpf:string, _cargaHoraria: number,  _areaDeAtuacao: string, _bolsa:number, ){
-        super(_nome,_idade, _cpf, _cargaHoraria)
-        this._formacao = "cursando";
+    constructor(_nome:string,_idade:number, _cpf:string, _formacao: string, _cargaHoraria: number,  _areaDeAtuacao: string, _bolsa:number, ){
+        super(_nome,_idade, _cpf, _formacao, _cargaHoraria)
         this._areaDeAtuacao = _areaDeAtuacao;
         this._bolsa = _bolsa;
+        this._statusDaFormacao = "Cursando"
     }
 
     get bolsa(){
@@ -105,9 +107,9 @@ class Estagiario extends Funcionarios{
     
 }
 
-const clt1 = new CLT ('Edson', 24, "149.824.057-78", 40, "Dev Back-End Junior", 3000)
+const clt1 = new CLT ('Edson', 24, "149.824.057-78", "Ciência da Computação", 40, "Dev Back-End Junior", 3000)
 
-const estagiario1 = new Estagiario ('João', 22, "000.000.000-00", 20, "Back-End", 1200)
+const estagiario1 = new Estagiario ('João', 22, "000.000.000-00", "Análise e Desenvolvimento de Sistemas", 20, "Back-End", 1200)
 console.log(clt1)
 console.log(clt1.gerarRemuneracao())
 
