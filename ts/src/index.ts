@@ -102,7 +102,7 @@ class Estagiario extends Funcionarios{
     }
 
     gerarRemuneracao(): string{
-        return `\nSua bolsa é: R$${this.bolsa}` 
+        return `\nSua bolsa é: R$${this._bolsa}` 
     }
     
 }
@@ -115,3 +115,4 @@ console.log(clt1.gerarRemuneracao())
 
 console.log(estagiario1)
 console.log(estagiario1.gerarRemuneracao())
+
