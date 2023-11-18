@@ -22,7 +22,7 @@
 //     * É preciso ter uma listagem de funcionários, para isso utilize uma classe Funcionários 
 //         * A classe Funcionarios deve métodos para adicionar e remover um funcionário
 
-class Funcionarios {
+abstract class Funcionarios {
     private _nome: string;
     private _idade: number;
     private _cpf: string;
@@ -53,9 +53,7 @@ class Funcionarios {
         return this._cargaHoraria
     }
 
-    gerarRemuneracao(){
-
-    }
+    abstract gerarRemuneracao(): string;
 }
 
 class CLT extends Funcionarios{
@@ -65,6 +63,14 @@ class CLT extends Funcionarios{
         super(_nome,_idade, _cpf, _cargaHoraria)
         this._cargo = _cargo;
         this._salario = _salario
+    }
+
+    get cargo(){
+        return this._cargo
+    }
+
+    get salario(){
+        return this._salario
     }
 
     gerarRemuneracao(): string{
