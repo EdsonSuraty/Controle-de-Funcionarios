@@ -1,5 +1,6 @@
 ## Crie as entidades(classes) necessárias para um sistema que faça o controle de funcionários de uma empresa. Essa empresa conta com dois tipos de contrato, CLT e estágio, e deve representar os atributos de seus funcionários de acordo com seu tipo de contrato, como carga horária, cargo, formação, dados pessoais.
 
+## Esse sistema, deve ser capaz de gerar o contra cheque de cada funcionário, deve também adicionar, remover e listar os funcionários
 
 * Um funcionário deve ter dados pessoais(nome, idade, etc.)
     * Um funcionário devem ter uma carga horária
