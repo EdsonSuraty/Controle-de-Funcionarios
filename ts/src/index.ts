@@ -22,7 +22,29 @@
 //     * É preciso ter uma listagem de funcionários, para isso utilize uma classe Funcionários 
 //         * A classe Funcionarios deve métodos para adicionar e remover um funcionário
 
-abstract class Funcionarios {
+interface DadosPessoais {
+    nome: string;
+    idade: number;
+    cpf: string;
+    formacao: string;
+    cargaHoraria: number;
+}
+
+interface CLTParams extends DadosPessoais {
+    cargo: string;
+    salario: number;
+}
+
+interface EstagiarioParams extends DadosPessoais {
+    areaDeAtuacao: string;
+    bolsa: number;
+}
+
+interface FuncionarioInterface {
+    gerarRemuneracao(): string;
+}
+
+abstract class Funcionarios implements FuncionarioInterface {
 
     private static listaDeFuncionarios: Funcionarios[] = [];
 
@@ -33,13 +55,13 @@ abstract class Funcionarios {
     protected _statusDaFormacao: string;
     private _cargaHoraria: number;
     
-    constructor(_nome:string,_idade:number, _cpf:string, _formacao:string, _cargaHoraria: number){
-        this._nome = _nome;
-        this._idade = _idade;
-        this._cpf = _cpf;
-        this._formacao = _formacao;
+    constructor(params: DadosPessoais){
+        this._nome = params.nome;
+        this._idade = params.idade;
+        this._cpf = params.cpf;
+        this._formacao = params.formacao;
         this._statusDaFormacao = "Concluído"
-        this._cargaHoraria = _cargaHoraria;
+        this._cargaHoraria = params.cargaHoraria;
     }
 
     static adicionarFuncionario(funcionario: Funcionarios) {
@@ -79,10 +101,10 @@ abstract class Funcionarios {
 class CLT extends Funcionarios{
     private _cargo: string
     private _salario: number
-    constructor(_nome:string,_idade:number, _cpf:string,_formacao: string, _cargaHoraria: number,  _cargo:string, _salario:number){
-        super(_nome,_idade, _cpf,_formacao, _cargaHoraria)
-        this._cargo = _cargo;
-        this._salario = _salario
+    constructor(params: CLTParams){
+        super(params)
+        this._cargo = params.cargo;
+        this._salario = params.salario
     }
 
     get cargo(){
@@ -103,11 +125,11 @@ class CLT extends Funcionarios{
 class Estagiario extends Funcionarios{
     private _bolsa: number;
     private _areaDeAtuacao: string;
-
-    constructor(_nome:string,_idade:number, _cpf:string, _formacao: string, _cargaHoraria: number,  _areaDeAtuacao: string, _bolsa:number, ){
-        super(_nome,_idade, _cpf, _formacao, _cargaHoraria)
-        this._areaDeAtuacao = _areaDeAtuacao;
-        this._bolsa = _bolsa;
+    
+    constructor(params: EstagiarioParams){
+        super(params)
+        this._areaDeAtuacao = params.areaDeAtuacao;
+        this._bolsa = params.bolsa;
         this._statusDaFormacao = "Cursando"
     }
 
@@ -125,9 +147,23 @@ class Estagiario extends Funcionarios{
     
 }
 
-const clt1 = new CLT ('Edson', 24, "149.824.057-78", "Ciência da Computação", 40, "Dev Back-End Junior", 3000)
+const clt1 = new CLT ({
+    nome: 'Edson', 
+    idade: 24, 
+    cpf: "149.824.057-78", 
+    formacao: "Ciência da Computação", 
+    cargaHoraria: 40, 
+    cargo: "Dev Back-End Junior", 
+    salario: 3000})
 
-const estagiario1 = new Estagiario ('João', 22, "000.000.000-00", "Análise e Desenvolvimento de Sistemas", 20, "Back-End", 1200)
+const estagiario1 = new Estagiario ({
+    nome: 'João', 
+    idade: 22, 
+    cpf: "000.000.000-00", 
+    formacao: "Análise e Desenvolvimento de Sistemas",
+    cargaHoraria: 20,
+    areaDeAtuacao: "Back-End",
+    bolsa: 1200})
 
 Funcionarios.adicionarFuncionario(clt1)
 console.log(Funcionarios.listarFuncionarios())
